@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Special Anniversary</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(30, 30, 40, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            color: #a8d8ea;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        input {
+            padding: 12px;
+            width: 80%;
+            margin: 15px 0;
+            border: 1px solid #555;
+            border-radius: 5px;
+            font-size: 16px;
+            background: rgba(50, 50, 60, 0.7);
+            color: #fff;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #a8d8ea;
+        }
+
+        button {
+            background: rgba(100, 150, 200, 0.3);
+            color: #a8d8ea;
+            border: 1px solid #a8d8ea;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background: rgba(100, 150, 200, 0.5);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .snowflake {
+            position: absolute;
+            color: #a8d8ea;
+            font-size: 16px;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+
+        .gift {
+            font-size: 80px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            margin: 20px 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .date-reveal {
+            font-size: 24px;
+            margin: 20px 0;
+            color: #ff6b6b;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #ff6b6b; }
+            to { text-shadow: 0 0 20px #ff6b6b, 0 0 30px #ff4757; }
+        }
+
+        .anniversary-message {
+            font-size: 22px;
+            line-height: 1.6;
+            margin: 20px 0;
+            animation: slideIn 1.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .heart-beat {
+            font-size: 60px;
+            animation: beat 1.5s infinite;
+            margin: 20px 0;
+            color: #ff6b6b;
+        }
+
+        @keyframes beat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .checkbox-container {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .checkbox-container input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .instructions {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .points-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .point-box {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .big-emoji {
+            font-size: 60px;
+            margin: 20px 0;
+            animation: pulse 1s infinite;
+        }
+
+        .response-box {
+            width: 80%;
+            height: 100px;
+            margin: 15px auto;
+            padding: 10px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #555;
+        }
+
+        .final-message {
+            font-size: 18px;
+            line-height: 1.8;
+            margin: 20px 0;
+            animation: fadeIn 2s;
+        }
+
+        .big-heart {
+            font-size: 80px;
+            margin: 20px 0;
+            color: #ff6b6b;
+            animation: beat 1s infinite;
+        }
+
+        /* Farewell Animation Styles */
+        .farewell-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .farewell-animation {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .boy {
+            width: 100px;
+            height: 150px;
+            background: #3498db;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            left: 50px;
+            bottom: 0;
+            animation: wave 2s infinite;
+        }
+        
+        .friend {
+            width: 100px;
+            height: 150px;
+            background: #e74c3c;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            right: 50px;
+            bottom: 0;
+        }
+        
+        .tear {
+            width: 5px;
+            height: 15px;
+            background: #3498db;
+            border-radius: 0 0 5px 5px;
+            position: absolute;
+            left: 30px;
+            top: 40px;
+            animation: cry 2s infinite;
+        }
+        
+        .message-bubble {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            position: absolute;
+            top: -40px;
+            left: 0;
+            width: 200px;
+            text-align: center;
+            animation: fadeInOut 4s infinite;
+            color: #333;
+        }
+        
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-10deg); }
+        }
+        
+        @keyframes cry {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { transform: translateY(20px); opacity: 1; }
+            100% { transform: translateY(40px); opacity: 0; }
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Screen -->
+    <div class="container" id="password-screen">
+        <h1>Tell me your name according to me...</h1>
+        <input type="text" id="password-input" placeholder="Enter the password...">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <!-- Gift Screen -->
+    <div class="container hidden message" id="gift-screen">
+        <h2>Here's something special for you...</h2>
+        <div class="gift" onclick="revealDate()">🎁</div>
+    </div>
+
+    <!-- Date Reveal Screen -->
+    <div class="container hidden message" id="date-screen">
+        <h2>From</h2>
+        <div class="date-reveal">28-03-2024</div>
+        <h2>To</h2>
+        <div class="date-reveal">28-03-2025</div>
+        <button onclick="showAnniversaryMessage()">Continue</button>
+    </div>
+
+    <!-- Anniversary Message Screen -->
+    <div class="container hidden message" id="anniversary-screen">
+        <div class="heart-beat">❣️</div>
+        <div class="anniversary-message">
+            <p>To my favorite person in the world...</p>
+            <p>The friend I can't forget in my life</p>
+        </div>
+        <h1 class="date-reveal">Happy First One Year Anniversary of our Friendship</h1>
+        <button onclick="askForGame()">Continue</button>
+    </div>
+
+    <!-- Game Ask Screen -->
+    <div class="container hidden message" id="game-ask-screen">
+        <h2>Will you play a small game with me?</h2>
+        <div>
+            <button onclick="yesOption()">Yeah, I will</button>
+            <button onclick="noOption()">No, I don't have time</button>
+        </div>
+    </div>
+
+    <!-- No Option Screen -->
+    <div class="container hidden message" id="no-screen">
+        <div class="emotional-text">
+            <p>Maine kabhi apna life itna enjoy nahi kiya jitna tumhare sath kiya.. thank you for that.</p>
+            <p>Tum meri hamesha first priority rahogi.. par mein tumhara ek normal sa dost banke rehna nahi chahta.</p>
+            <p>Tumne kal kaha tha, ki logo ke zindegi me people change hote hai... that hurt me a little.</p>
+            <p>Aaj bhi ek game ke liye mujhe time nahi diya... chalo, I can't force you.</p>
+        </div>
+        <div class="date-reveal">Once Again Happy First Friendship Anniversary</div>
+    </div>
+
+    <!-- Game Instructions Screen -->
+    <div class="container hidden message" id="instructions-screen">
+        <h2>Game Instructions</h2>
+        <div class="instructions">
+            <ol>
+                <li>Please Be Honest and give your full focus.</li>
+                <li>Apko agar sahi lage to Yes press krna, nahi to No press krna par please decision sochke lena.</li>
+                <li>Yes = Bubu's Point, No = Dubu's Point.</li>
+                <li>Let's begin the game.</li>
+            </ol>
+        </div>
+        <div class="checkbox-container">
+            <input type="checkbox" id="read-instructions"> <label for="read-instructions">I have read all the instructions</label><br>
+            <input type="checkbox" id="ready-to-continue"> <label for="ready-to-continue">Let's Continue</label>
+        </div>
+        <button id="continue-btn" onclick="startQuestions()" disabled>Continue</button>
+    </div>
+
+    <!-- Question 1 Screen -->
+    <div class="container hidden message" id="question1-screen">
+        <div class="points-container">
+            <div class="point-box">Bubu's Point: <span id="her-points">0</span></div>
+            <div class="point-box">Dubu's Point: <span id="my-points">0</span></div>
+        </div>
+        <h2>Question 1</h2>
+        <p>Kya ap mujhe dost mante ho?</p>
+        <button onclick="answerQuestion(1, true)">Yes</button>
+        <button onclick="answerQuestion(1, false)">No</button>
+    </div>
+
+    <!-- Question 1 Response Screen -->
+    <div class="container hidden message" id="question1-response-screen">
+        <div id="question1-response"></div>
+        <button onclick="showQuestion(2)">Continue</button>
+    </div>
+
+    <!-- Question 2 Screen -->
+    <div class="container hidden message" id="question2-screen">
+        <div class="points-container">
+            <div class="point-box">Bubu's Point: <span id="her-points-2">0</span></div>
+            <div class="point-box">Dubu's Point: <span id="my-points-2">0</span></div>
+        </div>
+        <h2>Question 2</h2>
+        <p>Apke hisab se ye sahi hai ki jab ap raat ko ye kehte ho ki dimag kharab maat kro .. sone do..</p>
+        <button onclick="answerQuestion(2, true)">Yes</button>
+        <button onclick="answerQuestion(2, false)">No</button>
+    </div>
+
+    <!-- Question 2 Response Screen -->
+    <div class="container hidden message" id="question2-response-screen">
+        <div id="question2-response"></div>
+        <button onclick="showQuestion(3)">Continue</button>
+    </div>
+
+    <!-- Question 3 Screen -->
+    <div class="container hidden message" id="question3-screen">
+        <div class="points-container">
+            <div class="point-box">Bubu's Point: <span id="her-points-3">0</span></div>
+            <div class="point-box">Dubu's Point: <span id="my-points-3">0</span></div>
+        </div>
+        <h2>Question 3</h2>
+        <p>Aisa ek bhi baat apko yaad hai, aisa koi bhi moment mere sath in eksaal me jo ap kabi nh bhuloge .. ya mere na hone par bhi kum se kum o ek baat yaad ho.</p>
+        <button onclick="answerQuestion(3, true)">Yes</button>
+        <button onclick="answerQuestion(3, false)">No</button>
+    </div>
+
+    <!-- Question 3 Response Screen (Yes) -->
+    <div class="container hidden message" id="question3-yes-screen">
+        <h2>Please mention it below:</h2>
+        <textarea class="response-box" id="memory-response" placeholder="Type your memory here..."></textarea>
+        <button onclick="saveMemoryResponse()">Continue</button>
+    </div>
+
+    <!-- Question 3 Response Screen (No) -->
+    <div class="container hidden message" id="question3-no-screen">
+        <div id="question3-response"></div>
+        <button onclick="showQuestion(4)">Continue</button>
+    </div>
+
+    <!-- Question 4 Screen -->
+    <div class="container hidden message" id="question4-screen">
+        <div class="points-container">
+            <div class="point-box">Bubu's Point: <span id="her-points-4">0</span></div>
+            <div class="point-box">Dubu's Point: <span id="my-points-4">0</span></div>
+        </div>
+        <h2>Question 4</h2>
+        <p>As you said, a best friend can change, a priority can change. Then feelings ka koi matlab nh hota .. jab ap ek janko o jagah dete ho.. Kya ye sahi hai?</p>
+        <button onclick="answerQuestion(4, true)">Yes</button>
+        <button onclick="answerQuestion(4, false)">No</button>
+    </div>
+
+    <!-- Question 4 Response Screen -->
+    <div class="container hidden message" id="question4-response-screen">
+        <div id="question4-response"></div>
+        <button onclick="showQuestion(5)">Continue</button>
+    </div>
+
+    <!-- Question 5 Screen -->
+    <div class="container hidden message" id="question5-screen">
+        <div class="points-container">
+            <div class="point-box">Bubu's Point: <span id="her-points-5">0</span></div>
+            <div class="point-box">Dubu's Point: <span id="my-points-5">0</span></div>
+        </div>
+        <h2>Question 5</h2>
+        <p>Mujhe pata hai ..ap bore ho gye honge... Zindegi me kabi bhi aisa laga ho ki mein apke life me thoda sa bhi zarurat ka part tha?</p>
+        <button onclick="answerQuestion(5, true)">Yes</button>
+        <button onclick="answerQuestion(5, false)">No</button>
+    </div>
+
+    <!-- Question 5 Response Screen -->
+    <div class="container hidden message" id="question5-response-screen">
+        <div id="question5-response"></div>
+        <button onclick="showFinalMessage()">Continue</button>
+    </div>
+
+    <!-- Final Message Screens -->
+    <div class="container hidden message" id="final-message-1">
+        <div class="final-message">
+            <p>Thank you for being a very special 1year of my life.</p>
+            <p>Mein zindegi me sabko bhul skta hu apko nh..</p>
+        </div>
+        <div class="big-heart">❣️</div>
+        <button onclick="showFinalMessage2()">Continue</button>
+    </div>
+
+    <div class="container hidden message" id="final-message-2">
+        <div class="final-message">
+            <p>Hamesha apka acha chata tha or hamesha chahunga</p>
+            <p>and insaan hu isliye bohot kharab kharab harkat Kiya hai ..</p>
+            <p>apko bar bar call krna ye preshan Krna..</p>
+        </div>
+        <div class="big-heart">❣️</div>
+        <button onclick="showFinalMessage3()">Continue</button>
+    </div>
+
+    <div class="container hidden message" id="final-message-3">
+        <div class="final-message">
+            <p>Hamesha bhagwan se prarthana krunga ki ap khush raho</p>
+            <p>and hamesha o pyaari si smile rhe apke face pe.</p>
+        </div>
+        <div class="big-heart">❣️</div>
+        <button onclick="showFinalMessage4()">Continue</button>
+    </div>
+
+    <div class="container hidden message" id="final-message-4">
+        <div class="final-message">
+            <p>Mujhe bharosa hai mein apko successful dekhunga ekdin..</p>
+            <p>chahe o mein sath me rehke hu ya koi or..</p>
+            <p>you will get success</p>
+        </div>
+        <div class="big-heart">❣️</div>
+        <button onclick="showFinalMessage5()">Continue</button>
+    </div>
+
+    <div class="container hidden message" id="final-message-5">
+        <div class="final-message">
+            <p>Once again thank you for giving me your precious time</p>
+            <p>Once again thank you. To be my bestest friend ever.</p>
+            <p>Thank you for caring me</p>
+            <p>Thank you bubu ❣️</p>
+        </div>
+        <div class="big-heart">❣️</div>
+        <button onclick="showFinalMessage6()">Continue</button>
+    </div>
+
+    <div class="container hidden message" id="final-message-6">
+        <div class="final-message">
+            <p>Sorry agar hurt Kiya ho to kabi</p>
+            <p>I miss you Bubu ❣️</p>
+            <p>Take care of yourself</p>
+        </div>
+        <div class="big-heart">❣️</div>
+        <button onclick="showFarewellAnimation()">Click Here</button>
+    </div>
+
+    <!-- Farewell Animation Screen -->
+    <div class="container hidden message" id="farewell-screen">
+        <div class="farewell-container">
+            <div class="farewell-animation">
+                <div class="boy">
+                    <div class="tear"></div>
+                    <div class="message-bubble">i Will Always Miss You...</div>
+                </div>
+                <div class="friend"></div>
+            </div>
+            <h2 style="color: white; text-align: center;">I'll always cherish our memories together ❣️</h2>
+            <button onclick="showFinalVideo()" style="margin-top: 20px;">Continue</button>
+        </div>
+    </div>
+
+    <!-- Video Screen -->
+    <div class="container hidden message" id="video-screen">
+        <h2>For You ❣️</h2>
+        <div id="player"></div>
+    </div>
+
+    <script>
+        // Game state
+        const gameState = {
+            herPoints: 0,
+            myPoints: 0,
+            memoryResponse: ""
+        };
+
+        // Create snowfall
+        function createSnow() {
+            const snowflakes = ["❄", "✻", "✼", "❅", "❆"];
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement("div");
+                snowflake.className = "snowflake";
+                snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                snowflake.style.left = Math.random() * 100 + "vw";
+                snowflake.style.animationDuration = Math.random() * 5 + 5 + "s";
+                snowflake.style.opacity = Math.random();
+                document.body.appendChild(snowflake);
+            }
+        }
+
+        // Check password
+        function checkPassword() {
+            const password = document.getElementById("password-input").value;
+            if (password.toLowerCase() === "bubu") {
+                document.getElementById("password-screen").classList.add("hidden");
+                document.getElementById("gift-screen").classList.remove("hidden");
+                createSnow();
+            } else {
+                alert("Wrong. Try again.");
+                document.getElementById("password-input").value = "";
+            }
+        }
+
+        // Reveal date when gift is clicked
+        function revealDate() {
+            document.getElementById("gift-screen").classList.add("hidden");
+            document.getElementById("date-screen").classList.remove("hidden");
+        }
+
+        // Show anniversary message
+        function showAnniversaryMessage() {
+            document.getElementById("date-screen").classList.add("hidden");
+            document.getElementById("anniversary-screen").classList.remove("hidden");
+        }
+
+        // Ask to play game
+        function askForGame() {
+            document.getElementById("anniversary-screen").classList.add("hidden");
+            document.getElementById("game-ask-screen").classList.remove("hidden");
+        }
+
+        // Yes option chosen
+        function yesOption() {
+            document.getElementById("game-ask-screen").classList.add("hidden");
+            document.getElementById("instructions-screen").classList.remove("hidden");
+            
+            // Enable continue button only when both checkboxes are checked
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const allChecked = document.getElementById('read-instructions').checked && 
+                                      document.getElementById('ready-to-continue').checked;
+                    document.getElementById('continue-btn').disabled = !allChecked;
+                });
+            });
+        }
+
+        // No option chosen
+        function noOption() {
+            document.getElementById("game-ask-screen").classList.add("hidden");
+            document.getElementById("no-screen").classList.remove("hidden");
+        }
+
+        // Start questions
+        function startQuestions() {
+            document.getElementById("instructions-screen").classList.add("hidden");
+            updatePointsDisplay();
+            document.getElementById("question1-screen").classList.remove("hidden");
+        }
+
+        // Show specific question
+        function showQuestion(questionNumber) {
+            // Hide all question screens first
+            const allScreens = [
+                "question1-screen", "question1-response-screen",
+                "question2-screen", "question2-response-screen",
+                "question3-screen", "question3-yes-screen", "question3-no-screen",
+                "question4-screen", "question4-response-screen",
+                "question5-screen", "question5-response-screen"
+            ];
+            
+            allScreens.forEach(screen => {
+                document.getElementById(screen).classList.add("hidden");
+            });
+            
+            // Show the requested question
+            document.getElementById(`question${questionNumber}-screen`).classList.remove("hidden");
+            updatePointsDisplay();
+        }
+
+        // Handle question answers
+        function answerQuestion(questionNumber, answer) {
+            if (answer) {
+                gameState.herPoints++;
+            } else {
+                gameState.myPoints++;
+            }
+
+            updatePointsDisplay();
+
+            // Handle question-specific responses
+            switch(questionNumber) {
+                case 1:
+                    document.getElementById("question1-screen").classList.add("hidden");
+                    const q1Response = document.getElementById("question1-response");
+                    if (answer) {
+                        q1Response.innerHTML = "<p>Please think once about this later.</p>";
+                    } else {
+                        q1Response.innerHTML = '<div class="big-emoji">👏</div><p>Then let\'s continue...</p>';
+                    }
+                    document.getElementById("question1-response-screen").classList.remove("hidden");
+                    break;
+                
+                case 2:
+                    document.getElementById("question2-screen").classList.add("hidden");
+                    const q2Response = document.getElementById("question2-response");
+                    q2Response.innerHTML = `
+                        <p>To ekbar sochna .. mein apke liye hi hota hu oha or ap mujhe ye kehte ho,</p>
+                        <p>hurt to insaan ko hi hota na.</p>
+                        <div class="heart-beat">❣️</div>
+                    `;
+                    document.getElementById("question2-response-screen").classList.remove("hidden");
+                    break;
+                
+                case 3:
+                    document.getElementById("question3-screen").classList.add("hidden");
+                    if (answer) {
+                        document.getElementById("question3-yes-screen").classList.remove("hidden");
+                        // Clear previous response
+                        document.getElementById("memory-response").value = "";
+                    } else {
+                        document.getElementById("question3-response").innerHTML = "<p>Let's continue...</p>";
+                        document.getElementById("question3-no-screen").classList.remove("hidden");
+                    }
+                    break;
+                
+                case 4:
+                    document.getElementById("question4-screen").classList.add("hidden");
+                    const q4Response = document.getElementById("question4-response");
+                    q4Response.innerHTML = `
+                        <p>Aisa krna samne wala ko bohot hurt krta hai.</p>
+                        <p>And you hurt them unknowingly.</p>
+                        <div class="heart-beat">❣️</div>
+                    `;
+                    document.getElementById("question4-response-screen").classList.remove("hidden");
+                    break;
+                
+                case 5:
+                    document.getElementById("question5-screen").classList.add("hidden");
+                    const q5Response = document.getElementById("question5-response");
+                    if (answer) {
+                        q5Response.innerHTML = `
+                            <p>Then why kisise aise change ho skta hai koi..</p>
+                            <div class="heart-beat">❣️</div>
+                        `;
+                    } else {
+                        q5Response.innerHTML = `
+                            <p>Khayal rakhna hamesha apna..</p>
+                            <div class="heart-beat">❣️</div>
+                        `;
+                    }
+                    document.getElementById("question5-response-screen").classList.remove("hidden");
+                    break;
+            }
+        }
+
+        // Save memory response for question 3
+        function saveMemoryResponse() {
+            gameState.memoryResponse = document.getElementById("memory-response").value;
+            document.getElementById("question3-yes-screen").classList.add("hidden");
+            
+            // Show thank you message
+            document.getElementById("question3-response").innerHTML = `
+                <p>Thank you for sharing this memory ❣️</p>
+                <div class="heart-beat">❣️</div>
+                <p>Let's continue...</p>
+            `;
+            document.getElementById("question3-no-screen").classList.remove("hidden");
+            
+            // Auto-proceed to question 4 after 2 seconds
+            setTimeout(() => {
+                document.getElementById("question3-no-screen").classList.add("hidden");
+                showQuestion(4);
+            }, 2000);
+        }
+
+        // Update points display on all screens
+        function updatePointsDisplay() {
+            for (let i = 1; i <= 5; i++) {
+                const herPointsEl = document.getElementById(`her-points${i > 1 ? '-'+i : ''}`);
+                const myPointsEl = document.getElementById(`my-points${i > 1 ? '-'+i : ''}`);
+                
+                if (herPointsEl) herPointsEl.textContent = gameState.herPoints;
+                if (myPointsEl) myPointsEl.textContent = gameState.myPoints;
+            }
+        }
+
+        // Show final messages in sequence
+        function showFinalMessage() {
+            document.getElementById("question5-response-screen").classList.add("hidden");
+            document.getElementById("final-message-1").classList.remove("hidden");
+        }
+
+        function showFinalMessage2() {
+            document.getElementById("final-message-1").classList.add("hidden");
+            document.getElementById("final-message-2").classList.remove("hidden");
+        }
+
+        function showFinalMessage3() {
+            document.getElementById("final-message-2").classList.add("hidden");
+            document.getElementById("final-message-3").classList.remove("hidden");
+        }
+
+        function showFinalMessage4() {
+            document.getElementById("final-message-3").classList.add("hidden");
+            document.getElementById("final-message-4").classList.remove("hidden");
+        }
+
+        function showFinalMessage5() {
+            document.getElementById("final-message-4").classList.add("hidden");
+            document.getElementById("final-message-5").classList.remove("hidden");
+        }
+
+        function showFinalMessage6() {
+            document.getElementById("final-message-5").classList.add("hidden");
+            document.getElementById("final-message-6").classList.remove("hidden");
+        }
+
+        function showFarewellAnimation() {
+            document.getElementById("final-message-6").classList.add("hidden");
+            document.getElementById("farewell-screen").classList.remove("hidden");
+            
+            // Auto-proceed to video after 5 seconds
+            setTimeout(() => {
+                showFinalVideo();
+            }, 5000);
+        }
+
+        function showFinalVideo() {
+            document.getElementById("farewell-screen").classList.add("hidden");
+            document.getElementById("video-screen").classList.remove("hidden");
+            
+            // Initialize player if not already initialized
+            if (!window.player) {
+                onYouTubeIframeAPIReady();
+            } else {
+                player.seekTo(50);
+                player.playVideo();
+            }
+            
+            // Send responses to email (simulated)
+            sendResponsesToEmail();
+        }
+
+        // YouTube Player API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '315',
+                width: '100%',
+                videoId: 'kw4tT7SCmaY',
+                playerVars: {
+                    'start': 50,
+                    'autoplay': 1,
+                    'controls': 1,
+                    'rel': 0
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Video will autoplay starting at 50 seconds
+            event.target.seekTo(50);
+            event.target.playVideo();
+        }
+
+        // Simulate sending responses to email
+        function sendResponsesToEmail() {
+            const email = "roydev56511@gmail.com";
+            const subject = "Responses from Bubu's Anniversary Game";
+            const body = `
+                Bubu's Points: ${gameState.herPoints}
+                Dubu's Points: ${gameState.myPoints}
+                Memory Response: ${gameState.memoryResponse}
+            `;
+            
+            // In a real implementation, you would use a server-side script or email API
+            console.log(`Would send email to ${email} with subject "${subject}" and body: ${body}`);
+            
+            // For demo purposes, we'll just log it
+            alert("Responses have been recorded. Thank you!");
+        }
+
+        // Start snowfall on load
+        window.onload = createSnow;
+    </script>
+</body>
+</html>
